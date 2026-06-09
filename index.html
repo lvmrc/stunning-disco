@@ -2,76 +2,259 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>𓆩♡𓆪 Scent Roasting Lab 𓆩♡𓆪</title>
+    <title>𓆩♡𓆪 The Burn Book 𓆩♡𓆪</title>
     <style>
-        body { background: #ffd1dc; font-family: "Courier New", monospace; color: #ff1493; padding: 20px; text-align: center; }
-        .gate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff0f5; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; }
-        .mixer { background: #fff; border: 4px ridge #ff1493; padding: 25px; margin-top: 40px; box-shadow: 6px 6px 0px #ff69b4; }
-        .mix-btn { background: #ff1493; color: white; padding: 15px 30px; font-weight: bold; cursor: pointer; border: 3px outset #ffb6c1; margin-top: 20px;}
-        .results { margin-top: 25px; padding: 20px; border: 2px dashed #ff1493; background: #fff5f7; display: none; text-align: left; }
+        /* 🌸 Y2K DIARY AESTHETIC 🌸 */
+        body {
+            background-color: #ffb6c1;
+            background-image: radial-gradient(#ff1493 10%, transparent 10%);
+            background-size: 20px 20px;
+            font-family: "Comic Sans MS", "Chalkboard SE", sans-serif;
+            color: #ff1493;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* THE PHYSICAL BOOK DESIGN */
+        .diary-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 800px;
+            min-height: 600px;
+            border-radius: 5px 25px 25px 5px;
+            border: 3px solid #ff1493;
+            border-left: 35px solid #ff1493; /* The Book Spine */
+            box-shadow: 10px 10px 0px rgba(255, 20, 147, 0.3);
+            padding: 30px;
+            position: relative;
+        }
+
+        /* FAKE SPIRAL BINDING RINGS */
+        .diary-container::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            left: -20px;
+            width: 30px;
+            background-image: radial-gradient(circle, #fff 40%, transparent 50%);
+            background-size: 100% 40px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px dashed #ffb6c1;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px #ffe4e1;
+        }
+
+        /* THE 4-SQUARE GRID MENU */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: #fff0f5;
+            border: 3px solid #ff69b4;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 4px 4px 0px #ffb6c1;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            background: #ffe4e1;
+            box-shadow: 6px 6px 0px #ff1493;
+        }
+
+        .menu-card h2 {
+            margin: 10px 0 5px 0;
+            font-size: 20px;
+        }
+
+        .menu-card p {
+            font-size: 12px;
+            color: #c71585;
+            margin: 0;
+        }
+
+        .icon {
+            font-size: 40px;
+        }
+
+        /* INSIDE PAGES (Hidden by default) */
+        .page-content {
+            display: none; /* Hidden until clicked */
+        }
+
+        .back-btn {
+            background: #ff1493;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-family: inherit;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .back-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px #000;
+        }
+
+        /* PUBLIC FORUM SAFE-GRID (Prevents overlapping) */
+        .post-feed {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .fake-post {
+            background: #fff;
+            border: 2px solid #ffb6c1;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 3px 3px 0px #ffe4e1;
+        }
+
+        .fake-img {
+            width: 100%;
+            height: 120px;
+            background: #eee;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 10px;
+        }
     </style>
 </head>
 <body>
 
-  <!-- THE SARCASTIC GATE -->
-  <div class="gate" id="gate">
-    <h1 style="font-size: 24px;">🎀 Oh, so you want to play? 🎀</h1>
-    <p>Welcome to the Fragrance Roast. I'm going to judge your taste and I'm not going to be nice about it. If you're sensitive, maybe go watch a makeup tutorial instead?</p>
-    <button class="mix-btn" onclick="document.getElementById('gate').style.display='none'">I’m ready, ruin my day</button>
-  </div>
-
-  <div class="mixer">
-    <h3>✨ The Compatibility Lab ✨</h3>
-    <select id="s1"></select> + <select id="s2"></select>
-    <br><button class="mix-btn" onclick="runLab()">ANALYZE MY VIBE</button>
-    <div class="results" id="res">
-      <h3 id="resTitle"></h3>
-      <p id="resScore" style="font-weight:bold;"></p>
-      <p id="resRead"></p>
-      <p id="resStory" style="font-style:italic; border-left:3px solid #ff1493; padding-left:10px;"></p>
-    </div>
-  </div>
-
-  <script>
-    const inv = ["Lattafa Eclaire", "Banoffi Eclaire", "Pistachio Eclaire", "Choco Musk", "Sticky Dates", "Sweet Tooth", "Pink Sugar", "Caramel Pop", "Taskeen", "Bianco Latte", "PDM Delina", "Burberry Her", "Prada Paradoxe", "Vanilla 28", "Burning Cherry", "Juicy Apple", "Fields At Night", "Bonbon", "Mon Guerlain", "Poison Girl", "YSL Libre", "Eilish No 1", "Khamrah", "SDJ 62", "SDJ 71", "SDJ 40", "Vanilla Visual", "NEST Vanilla", "Mataha", "Vanille Absolu", "Cloud", "Mod Vanilla", "Sweet Like Candy", "Gold Couture", "Mon Paris", "Lychee", "Citrus Sorbet", "Candy Love", "Fantasy", "Yara Pink", "Black Opium", "Le Parfum", "LDBS", "Killian Princess", "Milk", "Fireplace", "Coffee Break", "Good Girl", "Nebras", "Fresh Cream"];
-    
-    // I expanded these pools so it doesn't repeat!
-    const hypeReads = ["Main character energy. You're literally perfect.", "Obsessed. This is the only scent profile that matters.", "You didn't come to play, you came to win. Slay.", "Pure aesthetic bliss. Everyone in a 10-mile radius is jealous.", "This is elite-tier. You clearly understand how to exist."];
-    const hypeStories = ["You walked into a room and people actually stopped talking to look at you. Iconic.", "You had the best hair day of your life and everyone complimented you. We love that for you.", "Everything you touched today turned to gold. Honestly, go off.", "You didn't even have to try today; you just existed and the universe rewarded you.", "Your vibe is so immaculate today that a literal rainbow appeared when you stepped outside."];
-    
-    const midReads = ["You're playing it so safe it's actually painful.", "It's giving 'I bought this at a drugstore because it was on sale.'", "You are the human equivalent of a screen saver. Boring.", "You’re not failing, but you’re definitely not interesting.", "This combo is basic. Do better next time, bestie."];
-    const midStories = ["You walked into the store and felt absolutely nothing. How does it feel to be unremarkable?", "You bought an iced coffee, drank it, and then went to sleep. Peak mediocrity.", "You tried to take a selfie but the lighting was just off. So sad.", "You sat on your phone for three hours. The most interesting thing you did was blink.", "You went to the park and a squirrel looked at you and then just turned around."];
-    
-    const meanReads = ["Wake up, freak. You smell like pure dumpster fire.", "This is a hate crime against my nose. Are you trying to get cancelled?", "You smell like a damp locker room that caught a virus. Get help.", "This combo is repulsive. You have zero taste.", "Do yourself a favor and shower until this scent is completely gone."];
-    const meanStories = ["The local barista gagged when you walked in. You didn't get your drink. You deserved it.", "You went on a date and the person just walked away without saying a word. I don't blame them.", "Your cat ran away from you because you smelled like a toxic chemical spill. Good luck finding him.", "You fell into a puddle while trying to look cool. Everyone saw it. Everyone laughed.", "You got stood up, rained on, and lost your wallet. This is what you get for wearing this."];
-
-    const s1 = document.getElementById('s1'); const s2 = document.getElementById('s2');
-    inv.forEach(i => { s1.add(new Option(i, i)); s2.add(new Option(i, i)); });
-
-    function runLab() {
-        const v1 = document.getElementById('s1').value; const v2 = document.getElementById('s2').value;
-        const seed = (v1.length + v2.length) % 100;
-        document.getElementById('resTitle').innerHTML = `Mix: ${v1} + ${v2}`;
-        document.getElementById('res').style.display = 'block';
+    <div class="diary-container">
         
-        if (v1 === v2) {
-            document.getElementById('resScore').innerHTML = "0% (SOCIOPATH ALERT)";
-            document.getElementById('resRead').innerHTML = "You layered the same thing twice. You have zero soul.";
-            document.getElementById('resStory').innerHTML = "You achieved nothing today and the air density in your room is now unbearable. Please leave.";
-        } else if (seed > 60) {
-            document.getElementById('resScore').innerHTML = `${seed}% (SLAY)`;
-            document.getElementById('resRead').innerHTML = hypeReads[seed % hypeReads.length];
-            document.getElementById('resStory').innerHTML = hypeStories[seed % hypeStories.length];
-        } else if (seed > 30) {
-            document.getElementById('resScore').innerHTML = `${seed}% (BASIC)`;
-            document.getElementById('resRead').innerHTML = midReads[seed % midReads.length];
-            document.getElementById('resStory').innerHTML = midStories[seed % midStories.length];
-        } else {
-            document.getElementById('resScore').innerHTML = `${seed}% (TRASH)`;
-            document.getElementById('resRead').innerHTML = meanReads[seed % meanReads.length];
-            document.getElementById('resStory').innerHTML = meanStories[seed % meanStories.length];
+        <div class="header">
+            <h1>💋 The Burn Book 💋</h1>
+            <p style="margin:5px 0 0 0; font-size:14px;">Proceed with absolute caution.</p>
+        </div>
+
+        <div id="main-menu" class="menu-grid">
+            
+            <div class="menu-card" onclick="openPage('page-vent')">
+                <div class="icon">🔒</div>
+                <h2>The Vault</h2>
+                <p>Private venting. Scream into the digital void. Nobody sees this but you.</p>
+            </div>
+
+            <div class="menu-card" onclick="openPage('page-forum')">
+                <div class="icon">🔥</div>
+                <h2>Public Forum</h2>
+                <p>The actual Burn Book. Uploads, gossip, and anonymous drops.</p>
+            </div>
+
+            <div class="menu-card" onclick="openPage('page-owner')">
+                <div class="icon">👑</div>
+                <h2>DM The Queen</h2>
+                <p>Send a direct, private message straight to the site owner.</p>
+            </div>
+
+            <div class="menu-card" onclick="openPage('page-arsonettes')">
+                <div class="icon">💅</div>
+                <h2>The Arsonettes</h2>
+                <p>Talk to the girls. They bite back.</p>
+            </div>
+
+        </div>
+
+        <div id="page-vent" class="page-content">
+            <button class="back-btn" onclick="goHome()">⬅ Back to Cover</button>
+            <h2>🔒 The Vault</h2>
+            <p>Type it out and hit burn. It disappears forever.</p>
+            <textarea style="width: 100%; height: 150px; border: 2px solid #ff1493; padding: 10px; font-family: inherit; resize: none;" placeholder="Start venting here..."></textarea>
+            <button class="back-btn" style="margin-top: 10px;">🔥 BURN IT</button>
+        </div>
+
+        <div id="page-forum" class="page-content">
+            <button class="back-btn" onclick="goHome()">⬅ Back to Cover</button>
+            <h2>🔥 The Public Burn Book</h2>
+            <p>Anonymous uploads. Play nice, or don't.</p>
+            <button class="back-btn" style="background: #000;">+ UPLOAD NEW DROP</button>
+            
+            <div class="post-feed">
+                <div class="fake-post">
+                    <div class="fake-img">[Image Placeholder]</div>
+                    <p style="font-size: 12px; margin:0;">"Omg did you hear about..."</p>
+                </div>
+                <div class="fake-post">
+                    <div class="fake-img">[Image Placeholder]</div>
+                    <p style="font-size: 12px; margin:0;">"Spotted at the mall today looking a mess."</p>
+                </div>
+                <div class="fake-post">
+                    <div class="fake-img">[Image Placeholder]</div>
+                    <p style="font-size: 12px; margin:0;">"Just dropping this here..."</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-owner" class="page-content">
+            <button class="back-btn" onclick="goHome()">⬅ Back to Cover</button>
+            <h2>👑 Message The Owner</h2>
+            <p>Got a tip? Send it straight to my inbox.</p>
+            <input type="text" placeholder="Subject..." style="width: 100%; padding: 10px; margin-bottom: 10px; border: 2px solid #ff1493;">
+            <textarea style="width: 100%; height: 100px; border: 2px solid #ff1493; padding: 10px; font-family: inherit; resize: none;" placeholder="Spill it..."></textarea>
+            <button class="back-btn" style="margin-top: 10px;">SEND SECURELY</button>
+        </div>
+
+        <div id="page-arsonettes" class="page-content">
+            <button class="back-btn" onclick="goHome()">⬅ Back to Cover</button>
+            <h2>💅 The Arsonettes Lounge</h2>
+            <p>Pick a character to chat with:</p>
+            <div style="display: flex; gap: 10px;">
+                <button class="back-btn" style="background: #ff69b4;">Chat with Arsonette 1</button>
+                <button class="back-btn" style="background: #ff69b4;">Chat with Arsonette 2</button>
+            </div>
+            <div style="border: 2px dashed #ff1493; height: 150px; background: #fff0f5; padding: 10px; margin-top: 15px;">
+                <p style="color: #999; text-align: center; margin-top: 50px;">[Chat Window Prototype]</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function openPage(pageId) {
+            // Hide the main menu
+            document.getElementById('main-menu').style.display = 'none';
+            // Show the selected page
+            document.getElementById(pageId).style.display = 'block';
         }
-    }
-  </script>
+
+        function goHome() {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.style.display = 'none');
+            // Show the main menu again
+            document.getElementById('main-menu').style.display = 'grid';
+        }
+    </script>
+
 </body>
 </html>
