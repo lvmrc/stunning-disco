@@ -70,4 +70,182 @@
                 📸 ATTACH EVIDENCE: <input type="file" id="forumFile" accept="image/*" style="border:none; padding:0;">
             </label>
             <button class="back-btn" id="uploadBtn" onclick="uploadToForum()">PUBLISH LEAK</button>
-            <div
+            <div class="post-feed" id="liveFeed"></div>
+        </div>
+
+        <div id="page-owner" class="page-content">
+            <button class="back-btn" onclick="goHome()">⬅ Cover</button>
+            <h2>👑 Message My Secure Vault</h2>
+            <p>This bypasses the feed and goes straight to a private database only I can read.</p>
+            <input type="text" id="dmSubject" placeholder="What's the topic?..." required>
+            <textarea id="dmMessage" style="height:120px; resize:none;" placeholder="Spill the specific context safely..." required></textarea>
+            <button class="back-btn" onclick="sendQueenDM()">SEND SECURELY</button>
+        </div>
+
+        <div id="page-arsonettes" class="page-content">
+            <button class="back-btn" onclick="goHome()">⬅ Cover</button>
+            <h2>💅 The Arsonettes Lounge</h2>
+            <p>Drop a rumor in the chat. If they like it, they might tell you something someone else dropped earlier.</p>
+            <select id="arsonetteSelect">
+                <option value="Chloe">Chloe (Brutally honest)</option>
+                <option value="Madison">Madison (Collects messy drama)</option>
+            </select>
+            
+            <div class="chat-box" id="chatBox">
+                <div class="msg arson"><b>Chloe:</b> Feed me a rumor and maybe I'll give you one back. Make it good.</div>
+            </div>
+            
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="chatInput" placeholder="Tell her a rumor..." onkeypress="if(event.key==='Enter') sendArsonetteMessage()">
+                <button class="back-btn" style="margin:0; height:42px;" onclick="sendArsonetteMessage()">GOSSIP</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPage(id) {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById(id).style.display = 'block';
+            if(id === 'page-forum') {
+                if (typeof loadForumPosts === "function") loadForumPosts();
+            }
+        }
+        
+        function goHome() {
+            document.querySelectorAll('.page-content').forEach(p => p.style.display = 'none');
+            document.getElementById('main-menu').style.display = 'grid';
+        }
+
+        function burnSecret() {
+            const box = document.getElementById('ventBox');
+            if(!box.value.trim()) return;
+            box.classList.add('burning');
+            setTimeout(() => { box.value = ""; box.classList.remove('burning'); }, 1400);
+        }
+    </script>
+
+    <script>
+        let db, storage;
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyA-T24KF_DTLsRaAdtVazsG0Uv4n4hk2YA",
+                authDomain: "burnbook-f81c4.firebaseapp.com",
+                projectId: "burnbook-f81c4",
+                storageBucket: "burnbook-f81c4.firebasestorage.app",
+                messagingSenderId: "562124720458",
+                appId: "1:562124720458:web:ab6e1ce5fb72b2d56319b3",
+                measurementId: "G-W9038TCK0V"
+            };
+            
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            storage = firebase.storage();
+        } catch (error) {
+            console.error("Firebase connection paused.", error);
+        }
+
+        function sendQueenDM() {
+            if(!db) return alert("Firebase isn't connected properly.");
+            const sub = document.getElementById('dmSubject').value;
+            const msg = document.getElementById('dmMessage').value;
+            if(!sub || !msg) return alert("Fill out both boxes first.");
+
+            db.collection("private_dms").add({ subject: sub, message: msg, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+            .then(() => {
+                document.getElementById('dmSubject').value = "";
+                document.getElementById('dmMessage').value = "";
+                alert("Message locked in the Queen's vault. No one else can see this.");
+            });
+        }
+
+        function uploadToForum() {
+            if(!db || !storage) return alert("Firebase isn't connected properly.");
+            const text = document.getElementById('forumText').value;
+            const file = document.getElementById('forumFile').files[0];
+            const btn = document.getElementById('uploadBtn');
+            
+            if(!text && !file) return alert("You can't upload an empty rumor.");
+
+            btn.disabled = true; 
+            btn.innerText = "UPLOADING...";
+
+            if (file) {
+                const ref = storage.ref('burnbook/' + Date.now() + '_' + file.name);
+                ref.put(file).then(snapshot => snapshot.ref.getDownloadURL()).then(url => saveToFirestore(text, url));
+            } else {
+                saveToFirestore(text, "");
+            }
+        }
+
+        function saveToFirestore(text, imageUrl) {
+            db.collection("posts").add({ text: text, image: imageUrl, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+            .then(() => {
+                document.getElementById('forumText').value = ""; 
+                document.getElementById('forumFile').value = "";
+                const btn = document.getElementById('uploadBtn');
+                btn.disabled = false; 
+                btn.innerText = "PUBLISH LEAK";
+                loadForumPosts();
+            });
+        }
+
+        function loadForumPosts() {
+            if(!db) return;
+            const feed = document.getElementById('liveFeed');
+            db.collection("posts").orderBy("timestamp", "desc").get().then(snapshot => {
+                feed.innerHTML = "";
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    let imgTag = data.image ? `<img src="${data.image}">` : '';
+                    feed.innerHTML += `<div class="post-card">${imgTag}<p style="margin:0; font-size:13px;">"${data.text || ''}"</p></div>`;
+                });
+            });
+        }
+
+        const seedGossip = [
+            "I heard someone is faking their aesthetic for TikTok.",
+            "Apparently the entire friend group is collapsing over a boy.",
+            "Someone bought a Birkin DHGate dupe and tried to pass it off as real."
+        ];
+
+        function sendArsonetteMessage() {
+            const input = document.getElementById('chatInput');
+            const box = document.getElementById('chatBox');
+            const char = document.getElementById('arsonetteSelect').value;
+            const rumor = input.value.trim();
+            if(!rumor) return;
+
+            box.innerHTML += `<div class="msg user"><b>You:</b> ${rumor}</div>`;
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+
+            if(!db) {
+                setTimeout(() => {
+                    box.innerHTML += `<div class="msg arson"><b>${char}:</b> Ugh, I don't have time for this right now.</div>`;
+                    box.scrollTop = box.scrollHeight;
+                }, 1000);
+                return;
+            }
+
+            db.collection('gossip_pool').add({ text: rumor, timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+
+            db.collection('gossip_pool').limit(20).get().then(snap => {
+                let pool = [];
+                snap.forEach(doc => pool.push(doc.data().text));
+                
+                let replyGossip = seedGossip[Math.floor(Math.random() * seedGossip.length)];
+                if(pool.length > 1) {
+                    let filteredPool = pool.filter(g => g !== rumor);
+                    if(filteredPool.length > 0) replyGossip = filteredPool[Math.floor(Math.random() * filteredPool.length)];
+                }
+
+                const attitude = char === "Chloe" ? "Oh please. That's nothing. Someone literally just told me: " : "Messy. But wait, did you hear this? ";
+                setTimeout(() => {
+                    box.innerHTML += `<div class="msg arson"><b>${char}:</b> ${attitude} "${replyGossip}"</div>`;
+                    box.scrollTop = box.scrollHeight;
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
