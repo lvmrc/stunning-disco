@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>𓆩♡𓆪 My Pink Digital Vanity Vault 𓆩♡𓆪</title>
+    <title>𓆩♡𓆪 My 50-Bottle Fragrance Dynasty 𓆩♡𓆪</title>
     <style>
-        /* 🌸 OLD SCHOOL Y2K GLAM WEBCORE DESIGN 🌸 */
         body {
           background-color: #ffd1dc; 
           background-image: radial-gradient(#ff1493 15%, transparent 15%),
@@ -16,8 +15,6 @@
           padding: 20px;
           text-shadow: 1px 1px 0px #fff;
         }
-
-        /* USER PROFILE / PFP BANNER SECTION */
         .profile-container {
           background: #ffffff;
           border: 4px ridge #ff69b4;
@@ -28,7 +25,6 @@
           gap: 25px;
           margin-bottom: 30px;
         }
-
         .pfp-box {
           width: 110px;
           height: 110px;
@@ -39,289 +35,265 @@
           justify-content: center;
           overflow: hidden;
         }
-
-        .pfp-box img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .profile-info h1 {
-          font-size: 22px;
-          margin: 0 0 5px 0;
-          letter-spacing: -1px;
-        }
-
+        .pfp-box img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-info h1 { font-size: 22px; margin: 0 0 5px 0; letter-spacing: -1px; }
         .status-tag {
-          background: #ff1493;
-          color: white;
-          font-size: 11px;
-          padding: 2px 8px;
-          display: inline-block;
-          font-weight: bold;
-          text-transform: uppercase;
+          background: #ff1493; color: white; font-size: 11px; padding: 2px 8px;
+          display: inline-block; font-weight: bold; text-transform: uppercase;
         }
-
-        /* HORIZONTAL SCROLLING SHELVES */
         h2 {
-          font-size: 14px;
-          background: linear-gradient(90deg, #ff1493, #ffb6c1);
-          color: white;
-          padding: 6px 12px;
-          margin-top: 30px;
-          display: inline-block;
-          border: 2px solid #ff1493;
-          text-shadow: none;
+          font-size: 14px; background: linear-gradient(90deg, #ff1493, #ffb6c1);
+          color: white; padding: 6px 12px; margin-top: 30px; display: inline-block;
+          border: 2px solid #ff1493; text-shadow: none;
         }
-
         .scrolling-shelf {
-          display: flex;
-          overflow-x: auto;
-          gap: 15px;
-          padding: 15px;
-          background: rgba(255, 255, 255, 0.9);
-          border: 3px dashed #ff69b4;
-          margin-bottom: 20px;
+          display: flex; overflow-x: auto; gap: 15px; padding: 15px;
+          background: rgba(255, 255, 255, 0.95); border: 3px dashed #ff69b4; margin-bottom: 20px;
         }
-
         .product-card {
-          flex: 0 0 160px;
-          background: #ffffff;
-          border: 2px solid #ff1493;
-          box-shadow: 3px 3px 0px #ff69b4;
-          padding: 10px;
-          text-align: center;
+          flex: 0 0 160px; background: #ffffff; border: 2px solid #ff1493;
+          box-shadow: 3px 3px 0px #ff69b4; padding: 10px; text-align: center;
         }
-
         .window-bar {
-          background: #ff69b4;
-          color: white;
-          font-size: 9px;
-          padding: 2px;
-          margin-bottom: 8px;
-          text-align: left;
-          font-weight: bold;
+          background: #ff69b4; color: white; font-size: 9px; padding: 2px;
+          margin-bottom: 8px; text-align: left; font-weight: bold;
         }
-
-        .product-card img {
-          width: 100%;
-          height: 130px;
-          object-fit: contain;
-          background: #fff;
-          border: 1px solid #ffb6c1;
-        }
-
-        .product-card h3 {
-          font-size: 12px;
-          margin: 8px 0 2px 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .notes {
-          font-size: 10px;
-          color: #db7093;
-          margin: 0;
-        }
-
-        /* INTERACTIVE MIXER MACHINE DESIGN */
+        .product-card img { width: 100%; height: 120px; object-fit: contain; background: #fff; border: 1px solid #ffb6c1; }
+        .product-card h3 { font-size: 11px; margin: 8px 0 2px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .notes { font-size: 9px; color: #db7093; margin: 0; }
         .mixer-machine {
-          background: #ffffff;
-          border: 4px ridge #ff1493;
-          box-shadow: 6px 6px 0px #ff69b4;
-          padding: 20px;
-          margin-top: 40px;
-          text-align: center;
+          background: #ffffff; border: 4px ridge #ff1493; box-shadow: 6px 6px 0px #ff69b4;
+          padding: 25px; margin-top: 40px; text-align: center;
         }
-
-        .dropdown-box {
-          display: flex;
-          justify-content: center;
-          gap: 15px;
-          margin: 15px 0;
-        }
-
-        select {
-          font-family: "Courier New", monospace;
-          background: #fff5f7;
-          border: 2px solid #ff1493;
-          color: #ff1493;
-          padding: 8px;
-          font-weight: bold;
-        }
-
-        .mix-btn {
-          font-family: "Courier New", monospace;
-          background: #ff1493;
-          color: white;
-          font-size: 14px;
-          font-weight: bold;
-          padding: 10px 20px;
-          border: 3px outset #ffb6c1;
-          cursor: pointer;
-          box-shadow: 3px 3px 0px #000;
-        }
-
-        .mix-btn:active {
-          border-style: inset;
-          box-shadow: 1px 1px 0px #000;
-        }
-
-        /* SCENT GENERATOR OUTPUT */
-        .results-window {
-          margin-top: 20px;
-          padding: 15px;
-          border: 2px dashed #ff1493;
-          background: #fff5f7;
-          text-align: left;
-          display: none;
-        }
-
-        .story-text {
-          font-style: italic;
-          color: #c71585;
-          margin-top: 10px;
-          padding-left: 10px;
-          border-left: 3px solid #ff69b4;
-        }
+        .dropdown-box { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+        select { font-family: "Courier New", monospace; background: #fff5f7; border: 2px solid #ff1493; color: #ff1493; padding: 10px; font-weight: bold; max-width: 250px; outline: none; }
+        .mix-btn { font-family: "Courier New", monospace; background: #ff1493; color: white; font-size: 14px; font-weight: bold; padding: 12px 25px; border: 3px outset #ffb6c1; cursor: pointer; box-shadow: 3px 3px 0px #000; }
+        .mix-btn:active { border-style: inset; box-shadow: 1px 1px 0px #000; }
+        .results-window { margin-top: 25px; padding: 20px; border: 2px dashed #ff1493; background: #fff5f7; text-align: left; display: none; }
+        .review-header { color: #ff1493; margin: 0 0 10px 0; font-size: 18px; text-decoration: underline; font-weight: bold;}
+        .review-section { margin-bottom: 12px; font-size: 13px; line-height: 1.4; }
+        .review-title { font-weight: bold; color: #c71585; text-transform: uppercase; }
+        .story-text { font-style: italic; color: #8b008b; padding-left: 10px; border-left: 3px solid #ff69b4; margin-top: 5px;}
+        .score-bad { color: #d32f2f; font-weight: bold; font-size: 16px;}
+        .score-mid { color: #f57c00; font-weight: bold; font-size: 16px;}
+        .score-good { color: #388e3c; font-weight: bold; font-size: 16px;}
     </style>
 </head>
 <body>
 
-  <!-- PROFILE / PFP HEADER FRAME -->
   <div class="profile-container">
     <div class="pfp-box">
-      <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=GourmandPrincess" alt="PFP">
+      <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=SavageGourmand" alt="PFP">
     </div>
     <div class="profile-info">
       <h1>𓆩♡𓆪 lvmrc_closet.exe 𓆩♡𓆪</h1>
-      <p class="status-tag">Status: Layering Heavy Gourmands 👑</p>
-      <p style="margin: 5px 0 0 0; font-size: 11px;">"Too sweet does not exist in my vocabulary."</p>
+      <p class="status-tag">Status: Judging your fragrance choices 💅</p>
+      <p style="margin: 5px 0 0 0; font-size: 11px;">"If you smell basic, please stand 6 feet away from me."</p>
     </div>
   </div>
 
-  <div class="vanity-container">
+  <div class="vanity-container" id="vault-container"></div>
+
+  <div class="mixer-machine">
+    <h3>✨ 𓆩♡𓆪 The Layering Lab & Personality Read 𓆩♡𓆪 ✨</h3>
+    <p>Select any two of the 50 perfumes. I will analyze the exact combo and tell you exactly what kind of person you are.</p>
     
-    <!-- BODY CARE SHELF -->
-    <h2>𓆩♡𓆪 🧴 body_care_closet.dll 𓆩♡𓆪</h2>
-    <div class="scrolling-shelf">
-      <div class="product-card">
-        <div class="window-bar">body_lotion.exe</div>
-        <img src="https://images.unsplash.com/photo-1608248597481-496100c8c836?w=400" alt="Vanilla Lotion">
-        <h3>Vanilla Body Cream</h3>
-        <p class="notes">Base: Warm Bean</p>
-      </div>
-      <div class="product-card">
-        <div class="window-bar">body_oil.sys</div>
-        <img src="https://images.unsplash.com/photo-1617897903246-719242758050?w=400" alt="Body Oil">
-        <h3>Glazed Body Oil</h3>
-        <p class="notes">Base: Almond Glow</p>
-      </div>
+    <div class="dropdown-box">
+      <select id="scent1"></select>
+      <span style="font-size: 24px; font-weight: bold; margin-top: 5px;">＋</span>
+      <select id="scent2"></select>
     </div>
 
-    <!-- SKINCARE SHELF -->
-    <h2>𓆩♡𓆪 🪞 skincare_shelf.dll 𓆩♡𓆪</h2>
-    <div class="scrolling-shelf">
-      <div class="product-card">
-        <div class="window-bar">serum.exe</div>
-        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400" alt="Serum">
-        <h3>Glow Serum</h3>
-        <p class="notes">Step: Dewy Glow</p>
-      </div>
-      <div class="product-card">
-        <div class="window-bar">lip_mask.sys</div>
-        <img src="https://images.unsplash.com/photo-1601612628452-9e99ced43524?w=400" alt="Lip Mask">
-        <h3>Berry Lip Mask</h3>
-        <p class="notes">Step: Overnight Gloss</p>
-      </div>
+    <button class="mix-btn" onclick="generateScentCombo()">🧪 GET READ FOR FILTH 🧪</button>
+
+    <div class="results-window" id="resultsBlock">
+      <div class="review-header" id="resTitle"></div>
+      <div class="review-section"><span class="review-title">Compatibility:</span> <span id="resMatch"></span></div>
+      <div class="review-section"><span class="review-title">The Read:</span> <span id="resPersonality"></span></div>
+      <div class="review-section"><span class="review-title">What Happens To You:</span> <div class="story-text" id="resStory"></div></div>
     </div>
-
-    <!-- FRAGRANCE SHELF -->
-    <h2>𓆩♡𓆪 🧪 the_fragrance_vault.dll 𓆩♡𓆪</h2>
-    <div class="scrolling-shelf">
-      <div class="product-card"><div class="window-bar">eclaire.exe</div><img src="https://m.media-amazon.com/images/I/61M3VzL3jFL._SL1500_.jpg"><h3>Lattafa Eclaire</h3><p class="notes">Caramel, Milk, Honey</p></div>
-      <div class="product-card"><div class="window-bar">banoffi.exe</div><img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=300"><h3>Banoffi Eclaire</h3><p class="notes">Banana, Toffee, Cream</p></div>
-      <div class="product-card"><div class="window-bar">pistachio.exe</div><img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=300"><h3>Pistachio Eclaire</h3><p class="notes">Pistachio, Cream</p></div>
-      <div class="product-card"><div class="window-bar">choco_musk.exe</div><img src="https://m.media-amazon.com/images/I/51bA9+1oKxL._SL1000_.jpg"><h3>Choco Musk</h3><p class="notes">Chocolate Marshmallow</p></div>
-      <div class="product-card"><div class="window-bar">sticky_dates.sys</div><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300"><h3>Sticky Dates</h3><p class="notes">Dates, Toffee Syrup</p></div>
-      <div class="product-card"><div class="window-bar">delina.exe</div><img src="https://m.media-amazon.com/images/I/51p6g7o8pFL._SL1000_.jpg"><h3>PDM Delina</h3><p class="notes">Lychee, Rose, Rhubarb</p></div>
-      <div class="product-card"><div class="window-bar">sweet_tooth.exe</div><img src="https://m.media-amazon.com/images/I/61SdfV91XoL._SL1500_.jpg"><h3>Sweet Tooth</h3><p class="notes">Marshmallow, Cocoa</p></div>
-    </div>
-
-    <!-- INTERACTIVE SCENT LAYERING MACHINE -->
-    <div class="mixer-machine">
-      <h3>✨ 𓆩♡𓆪 Scent_Layering_Lab.exe 𓆩♡𓆪 ✨</h3>
-      <p>Select two perfumes from your vault to simulate a layer formula combo:</p>
-      
-      <div class="dropdown-box">
-        <select id="scent1">
-          <option value="eclaire">Lattafa Eclaire</option>
-          <option value="banoffi">Banoffi Eclaire</option>
-          <option value="pistachio">Pistachio Eclaire</option>
-          <option value="choco">Choco Musk</option>
-          <option value="dates">Sticky Dates</option>
-          <option value="delina">PDM Delina</option>
-          <option value="sweettooth">Sweet Tooth</option>
-        </select>
-        
-        <span style="font-size: 20px; font-weight: bold;">＋</span>
-        
-        <select id="scent2">
-          <option value="choco">Choco Musk</option>
-          <option value="eclaire">Lattafa Eclaire</option>
-          <option value="banoffi">Banoffi Eclaire</option>
-          <option value="pistachio">Pistachio Eclaire</option>
-          <option value="dates">Sticky Dates</option>
-          <option value="delina">PDM Delina</option>
-          <option value="sweettooth">Sweet Tooth</option>
-        </select>
-      </div>
-
-      <button class="mix-btn" onclick="generateScentCombo()">🧪 RUN DISCO LAYER CODE 🧪</button>
-
-      <!-- RESULTS POPUP -->
-      <div class="results-window" id="resultsBlock">
-        <h4 style="margin: 0 0 5px 0; color: #ff1493;" id="resTitle">🔮 Mix Analysis Report:</h4>
-        <p style="margin: 4px 0;" id="resMatch"></p>
-        <p style="margin: 4px 0;" id="resPersonality"></p>
-        <div class="story-text" id="resStory"></div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- INTERACTIVE LOGIC SCRIPT -->
   <script>
-    function generateScentCombo() {
-      const s1 = document.getElementById('scent1').value;
-      const s2 = document.getElementById('scent2').value;
-      const block = document.getElementById('resultsBlock');
-      
-      let matchScore = "";
-      let personality = "";
-      let story = "";
+    const inventory = [
+      { id: 1, name: "Lattafa Eclaire", category: "Heavy Gourmand", img: "https://m.media-amazon.com/images/I/61M3VzL3jFL._SL1500_.jpg", notes: "Caramel, Milk, Honey" },
+      { id: 2, name: "Banoffi Eclaire", category: "Heavy Gourmand", img: "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=300", notes: "Banana, Toffee, Cream" },
+      { id: 3, name: "Pistachio Eclaire", category: "Heavy Gourmand", img: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=300", notes: "Pistachio, Sweet Cream" },
+      { id: 4, name: "Choco Musk", category: "Heavy Gourmand", img: "https://m.media-amazon.com/images/I/51bA9+1oKxL._SL1000_.jpg", notes: "Chocolate, Vanilla" },
+      { id: 5, name: "Sticky Dates", category: "Heavy Gourmand", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300", notes: "Dates, Toffee Syrup" },
+      { id: 6, name: "Sweet Tooth", category: "Heavy Gourmand", img: "https://m.media-amazon.com/images/I/61SdfV91XoL._SL1500_.jpg", notes: "Marshmallow, Cocoa" },
+      { id: 7, name: "Pink Sugar", category: "Heavy Gourmand", img: "https://m.media-amazon.com/images/I/517f-0pY8rL._SL1000_.jpg", notes: "Cotton Candy, Caramel" },
+      { id: 8, name: "Sweet Tooth Caramel", category: "Heavy Gourmand", img: "https://images.unsplash.com/photo-1608248597481-496100c8c836?w=300", notes: "Dark Caramel, Coconut" },
+      { id: 9, name: "Taskeen Caramel", category: "Heavy Gourmand", img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=300", notes: "Creamy Caramel, Pear" },
+      { id: 10, name: "Bianco Latte", category: "Heavy Gourmand", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Milk, Honey, Vanilla" },
+      { id: 11, name: "PDM Delina", category: "Pink Princess", img: "https://m.media-amazon.com/images/I/51p6g7o8pFL._SL1000_.jpg", notes: "Lychee, Rose, Rhubarb" },
+      { id: 12, name: "Burberry Her", category: "Pink Princess", img: "https://m.media-amazon.com/images/I/51N-3Y38pBL._SL1000_.jpg", notes: "Strawberry, Blackberry" },
+      { id: 13, name: "Prada Paradoxe", category: "Pink Princess", img: "https://m.media-amazon.com/images/I/510R1wS0C1L._SL1000_.jpg", notes: "Neroli, Amber, Musk" },
+      { id: 14, name: "Kayali Vanilla 28", category: "Pink Princess", img: "https://m.media-amazon.com/images/I/516m5Y6bveL._SL1000_.jpg", notes: "Brown Sugar, Amber" },
+      { id: 15, name: "Kayali Cherry", category: "Pink Princess", img: "https://m.media-amazon.com/images/I/61VGA0Y-E8L._SL1000_.jpg", notes: "Burning Cherry, Amber" },
+      { id: 16, name: "Kayali Juicy Apple", category: "Pink Princess", img: "https://m.media-amazon.com/images/I/51Z2a9wGZTL._SL1000_.jpg", notes: "Red Apple, Berries" },
+      { id: 17, name: "Zara Fields At Night", category: "Pink Princess", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", notes: "Praline, Sandalwood" },
+      { id: 18, name: "Viktor&Rolf Bonbon", category: "Pink Princess", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300", notes: "Caramel, Peach" },
+      { id: 19, name: "Mon Guerlain", category: "Pink Princess", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Lavender, Vanilla" },
+      { id: 20, name: "Dior Poison Girl", category: "Pink Princess", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", notes: "Bitter Orange, Tonka" },
+      { id: 21, name: "YSL Libre", category: "Warm Amber", img: "https://m.media-amazon.com/images/I/41O36i46kEL._SL1000_.jpg", notes: "Lavender, Blossom" },
+      { id: 22, name: "Eilish No. 1", category: "Warm Amber", img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=300", notes: "Sugared Petals, Vanilla" },
+      { id: 23, name: "Lattafa Khamrah", category: "Warm Amber", img: "https://images.unsplash.com/photo-1615655404745-d10d243f1d9b?w=300", notes: "Cinnamon, Dates" },
+      { id: 24, name: "Sol de Janeiro 62", category: "Warm Amber", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Pistachio, Caramel" },
+      { id: 25, name: "Sol de Janeiro 71", category: "Warm Amber", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", notes: "Macadamia, Choc" },
+      { id: 26, name: "Sol de Janeiro 40", category: "Warm Amber", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300", notes: "Black Amber, Woods" },
+      { id: 27, name: "Phlur Vanilla", category: "Warm Amber", img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=300", notes: "Vanilla, Cardamom" },
+      { id: 28, name: "NEST Madagascar", category: "Warm Amber", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Vanilla Bean, Coconut" },
+      { id: 29, name: "Mataha Escapade", category: "Warm Amber", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", notes: "Brown Sugar, Vanilla" },
+      { id: 30, name: "Montale Vanille", category: "Warm Amber", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300", notes: "Vanilla, Cinnamon" },
+      { id: 31, name: "Ariana Cloud", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300", notes: "Lavender, Pear" },
+      { id: 32, name: "Ariana Mod Vanilla", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", notes: "Plum, Praline" },
+      { id: 33, name: "Sweet Like Candy", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Blackberry, Marshmallow" },
+      { id: 34, name: "Juicy Couture Gold", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=300", notes: "Wild Berries, Caramel" },
+      { id: 35, name: "YSL Mon Paris", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1615655404745-d10d243f1d9b?w=300", notes: "Strawberry, Raspberry" },
+      { id: 36, name: "Sparkling Lychee", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Lychee, Violet" },
+      { id: 37, name: "Citrus Sorbet", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", notes: "Mandarin, White Musk" },
+      { id: 38, name: "Escada Candy Love", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300", notes: "Candy Apple, Cream" },
+      { id: 39, name: "Britney Fantasy", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=300", notes: "Kiwi, White Choc" },
+      { id: 40, name: "Lattafa Yara Pink", category: "Fruity Sweet", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Orchid, Gourmand" },
+      { id: 41, name: "YSL Black Opium", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", notes: "Coffee, Vanilla" },
+      { id: 42, name: "Black Opium Le Parfum", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300", notes: "Heavy Vanilla, Coffee" },
+      { id: 43, name: "Love Don't Be Shy", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=300", notes: "Marshmallow, Blossom" },
+      { id: 44, name: "Killian Princess", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1615655404745-d10d243f1d9b?w=300", notes: "Matcha, Marshmallow" },
+      { id: 45, name: "Commodity Milk", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Mahogany, Milk" },
+      { id: 46, name: "By The Fireplace", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", notes: "Chestnut, Woody" },
+      { id: 47, name: "Replica Coffee Break", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300", notes: "Coffee, Lavender Cream" },
+      { id: 48, name: "CH Good Girl", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=300", notes: "Almond, Tonka Bean" },
+      { id: 49, name: "Lattafa Nebras", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1615655404745-d10d243f1d9b?w=300", notes: "Red Berries, Cacao" },
+      { id: 50, name: "Fresh Cream", category: "Night Exclusives", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", notes: "Whipped Cream, Sugar" }
+    ];
 
-      if (s1 === s2) {
-        matchScore = "⚠️ ERROR: 50% Compatibility (Double Dose)";
-        personality = "Personality Guess: You crave chaotic stability. You know exactly what you like and you will amplify it until the whole world suffocates in sweetness.";
-        story = "The room is dead quiet. You sprayed the exact same bottle twice. Nothing magical happened, but the air density just multiplied by ten. Your cat leaves the bedroom.";
-      } 
-      else if ((s1 === 'eclaire' || s1 === 'choco' || s1 === 'banoffi' || s1 === 'dates' || s1 === 'pistachio' || s1 === 'sweettooth') && 
-               (s2 === 'eclaire' || s2 === 'choco' || s2 === 'banoffi' || s2 === 'dates' || s2 === 'pistachio' || s2 === 'sweettooth')) {
-        matchScore = "💖 COMPATIBILITY: 100% (The Supreme Bakery Goddess)";
-        personality = "Personality Guess: You are ultra-cozy, completely unapologetic, and highly dedicated to absolute luxury comfort. You want to walk past people and make them crave snacks.";
-        story = "On a foggy evening, you step into a dimly lit kitchen where a freshly baked caramel tart is cooling on the counter next to an open jar of milk chocolate cream. The warmth wraps around you like a heavy pink cashmere blanket. Everything feels safe, sweet, and perfectly soft.";
-      } 
-      else if (s1 === 'delina' || s2 === 'delina') {
-        matchScore = "💔 COMPATIBILITY: 35% (The Fragrance Civil War)";
-        personality = "Personality Guess: You are highly ambitious but experiencing a massive internal vibe crisis right now. Half of you wants to be a high-end corporate boss, and the other half wants to eat cupcakes in bed.";
-        story = "The high-end, crisp Turkish roses of Delina are suddenly ambushed by thick, boiling hot pots of sticky brown sugar toffee syrup. The roses are fighting for dear life. A minor atmospheric disturbance occurs inside your vanity directory. Something went wrong.";
+    window.onload = function() {
+      const container = document.getElementById("vault-container");
+      const drop1 = document.getElementById("scent1");
+      const drop2 = document.getElementById("scent2");
+      let currentCat = "";
+      let shelfHTML = "";
+
+      inventory.forEach((item) => {
+        let option = new Option(`${item.name} (${item.notes})`, item.name);
+        drop1.add(option.cloneNode(true));
+        drop2.add(option);
+        if (item.category !== currentCat) {
+          if (currentCat !== "") shelfHTML += `</div>`;
+          currentCat = item.category;
+          shelfHTML += `<h2>𓆩♡𓆪 🧪 ${currentCat.toLowerCase().replace(' ', '_')}.dll 𓆩♡𓆪</h2><div class="scrolling-shelf">`;
+        }
+        shelfHTML += `<div class="product-card"><div class="window-bar">item_${item.id}.exe</div><img src="${item.img}" loading="lazy"><h3>${item.name}</h3><p class="notes">${item.notes}</p></div>`;
+      });
+      shelfHTML += `</div>`;
+      container.innerHTML = shelfHTML;
+    };
+    
+    const meanReads = [
+      "Wake up and smell the cappuccino freakshit. Mixing these two literally proves you have zero self-awareness and go through life like an NPC.",
+      "Oh, sweetie... no. This screams 'I peek at my best friend's diary and still have a 2012 Tumblr.' You are the human equivalent of a damp sock.",
+      "Literally touch grass immediately. Anyone who puts these two on together is a walking red flag who manipulates their mom for Sephora money.",
+      "Are you okay? Did you lose a bet? Because choosing this combination is grounds for a restraining order from the fragrance community.",
+      "You are chronically online and it shows. This smells like a Yankee candle died inside a Hot Topic. Get a grip.",
+      "This is aggressively awful. You probably chew with your mouth open and text your ex at 3 AM. Have some decorum.",
+      "I am calling the police. You have traumatized my digital nose. You exude 'group project slacker' energy.",
+      "This combination is giving 'I microwave fish in the breakroom.' You are a menace to polite society."
+    ];
+
+    const meanStories = [
+      "You walked outside smelling like this abomination. The local barista literally gagged, handed you a decaf out of pity, and you were so embarrassed you tripped over a loose brick and tumbled straight into an open sewer grate. Do better.",
+      "You wore this to the mall and a literal pigeon swooped down, looked you dead in the eye, and pooped on your favorite shoes. Even the birds know your vibe is rancid today. Go home.",
+      "Your chosen pair was so funky you made a 100-year-old oak tree sneeze, its root kicked out, you tripped over it, fell down a muddy hill, and landed in a puddle of old mayonnaise. Tragic.",
+      "You stepped onto the bus smelling like this and the driver immediately hit the emergency brake. You got kicked out into a thunderstorm without an umbrella and your phone fell in a puddle.",
+      "You thought you ate, but you sprayed this on, went on a date, and your hinge match faked a family emergency before the appetizers even arrived. You had to pay the $80 bill alone.",
+      "You walked into a Sephora and the security guard immediately asked you to leave because the clash of notes was setting off the fire alarms. You are banned from the premises.",
+      "You tried to film a cute 'get ready with me' TikTok but the sheer toxicity of this scent combo corrupted the video file. Your camera lens cracked.",
+      "You wore this to a family dinner and your own grandmother asked if something died in the walls. You had to eat your turkey on the porch in the cold."
+    ];
+
+    const midReads = [
+      "Okay, so this is... a choice. It's giving 'I tried really hard but I still buy my clothes from the clearance rack at Forever 21.'",
+      "You definitely mean well, but you are painfully average. You probably think adding vanilla syrup to an iced coffee is a personality trait.",
+      "It's not a crime, but it's definitely a misdemeanor. You blend into the background so hard people forget you're even in the room.",
+      "You are the human equivalent of plain oatmeal. It's fine, it gets the job done, but absolutely nobody is excited about it.",
+      "This is playing it so safe it hurts. You probably apologize when someone else bumps into you."
+    ];
+
+    const midStories = [
+      "You wore this out, someone asked if you were wearing Bath & Body Works from 2014, and you spent the rest of the day picking a wedgie you couldn't fix in public.",
+      "You walked into Target smelling like this, bought $40 of things you didn't need, and then your card declined at the register. A slightly embarrassing Tuesday.",
+      "You sprayed this on, took a selfie, and it got 11 likes. You stared at the wall for two hours wondering where it all went wrong.",
+      "You went to a party and introduced yourself to the same person three times because your scent profile was so unmemorable they kept forgetting you existed.",
+      "You dropped your keys in a parking lot, bent over to get them, and ripped your favorite jeans. It wasn't a tragedy, just a minor annoyance that matches this mid scent."
+    ];
+
+    const hypeReads = [
+      "Wait, wait, wait... you are literally a genius and I'm obsessed with you. This is giving 'I own 51% of this company and your boyfriend is in my DMs.'",
+      "A literal goddess walks among us. You don't chase, you attract. People are terrified of how good you look and smell.",
+      "You are the main character. You exude trust-fund energy, perfect credit scores, and an incredibly intimidating skincare routine.",
+      "You absolutely devoured this. You smell like you only fly first class and exclusively drink sparkling water imported from Italy.",
+      "I am bowing down. This is weaponized luxury. You walk past people and ruin their marriages just by smelling this good."
+    ];
+
+    const hypeStories = [
+      "You walked into a café smelling like this and the barista immediately gave you a free matcha, a modeling scout begged for your number, and you found a crisp $100 bill on the sidewalk. You are the moment.",
+      "You wore this out and the weather literally cleared up just for you. Your crush texted you first, you got a spontaneous 50% discount at Sephora, and a butterfly landed on your shoulder.",
+      "You stepped into the room and everyone went completely silent. Someone asked what you were wearing and you just smiled, gatekept it, and walked away leaving them obsessed for the next five years.",
+      "You sprayed this on before an interview and the hiring manager just handed you the keys to the building and retired on the spot. You now own the company.",
+      "You walked past a wealthy heir and he immediately dropped to one knee and handed you the deed to a French chateau. You now live in Paris and never have to work a day in your life."
+    ];
+
+    function simpleHash(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0; 
+      }
+      return Math.abs(hash);
+    }
+
+    function generateScentCombo() {
+      const name1 = document.getElementById('scent1').value;
+      const name2 = document.getElementById('scent2').value;
+      const block = document.getElementById('resultsBlock');
+      const comboString = [name1, name2].sort().join('+');
+      const seed = simpleHash(comboString);
+      
+      let score, read, story, matchClass;
+      document.getElementById('resTitle').innerHTML = `Mix Review: ${name1} ＋ ${name2}`;
+
+      if (name1 === name2) {
+        score = "0% (DOUBLE DOSE RED ALERT)";
+        matchClass = "score-bad";
+        read = "Wake up freak. You just layered the exact same perfume over itself. You have zero creativity and probably eat plain white bread for dinner. You are a sociopath.";
+        story = "You double sprayed this and the air density in your room multiplied by ten. Your own mother coughed when you walked down the stairs. You tripped over your cat, spilled your drink, and had to stay home because you gave yourself a massive headache. Loser.";
+      } else {
+        const matchPercent = (seed % 100) + 1; 
+        
+        if (matchPercent >= 75) {
+          score = `${matchPercent}% (ABSOLUTE SOULMATES)`;
+          matchClass = "score-good";
+          read = hypeReads[seed % hypeReads.length];
+          story = hypeStories[seed % hypeStories.length];
+        } 
+        else if (matchPercent >= 40) {
+          score = `${matchPercent}% (MID AS HELL)`;
+          matchClass = "score-mid";
+          read = midReads[seed % midReads.length];
+          story = midStories[seed % midStories.length];
+        } 
+        else {
+          score = `${matchPercent}% (TOXIC DISASTER)`;
+          matchClass = "score-bad";
+          read = meanReads[seed % meanReads.length];
+          story = meanStories[seed % meanStories.length];
+        }
       }
 
-      document.getElementById('resMatch').innerHTML = "<b>Vibe Profile:</b> " + matchScore;
-      document.getElementById('resPersonality').innerHTML = "<b>Analysis:</b> " + personality;
-      document.getElementById('resStory').innerHTML = "<b>Vibe Story:</b> \"" + story + "\"";
+      document.getElementById('resMatch').innerHTML = `<span class="${matchClass}">${score}</span>`;
+      document.getElementById('resPersonality').innerHTML = read;
+      document.getElementById('resStory').innerHTML = `"${story}"`;
       block.style.display = "block";
     }
   </script>
