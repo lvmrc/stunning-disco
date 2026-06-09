@@ -3,258 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <title>𓆩♡𓆪 The Burn Book 𓆩♡𓆪</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
     <style>
         /* 🌸 Y2K DIARY AESTHETIC 🌸 */
-        body {
-            background-color: #ffb6c1;
-            background-image: radial-gradient(#ff1493 10%, transparent 10%);
-            background-size: 20px 20px;
-            font-family: "Comic Sans MS", "Chalkboard SE", sans-serif;
-            color: #ff1493;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
+        body { background-color: #ffb6c1; background-image: radial-gradient(#ff1493 10%, transparent 10%); background-size: 20px 20px; font-family: "Comic Sans MS", "Chalkboard SE", sans-serif; color: #ff1493; padding: 20px; display: flex; justify-content: center; }
+        .diary-container { background: #ffffff; width: 100%; max-width: 800px; min-height: 600px; border-radius: 5px 25px 25px 5px; border: 3px solid #ff1493; border-left: 35px solid #ff1493; box-shadow: 10px 10px 0px rgba(255, 20, 147, 0.3); padding: 30px; position: relative; }
+        .header { text-align: center; border-bottom: 3px dashed #ffb6c1; padding-bottom: 15px; margin-bottom: 25px; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .menu-card { background: #fff0f5; border: 3px solid #ff69b4; border-radius: 15px; padding: 30px 20px; text-align: center; cursor: pointer; box-shadow: 4px 4px 0px #ffb6c1; }
+        .menu-card:hover { transform: translateY(-5px); background: #ffe4e1; box-shadow: 6px 6px 0px #ff1493; }
+        .page-content { display: none; }
+        .back-btn { background: #ff1493; color: white; border: none; padding: 8px 15px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-bottom: 20px; box-shadow: 2px 2px 0px #000; }
+        input, textarea, select { width: 100%; padding: 10px; margin-bottom: 12px; border: 2px solid #ff1493; font-family: inherit; box-sizing: border-box; }
+        
+        /* BURN ANIMATION */
+        @keyframes ashBurn {
+            0% { filter: invert(0) blur(0); opacity: 1; transform: scale(1); }
+            50% { filter: invert(1) sepia(1) saturate(5) hue-rotate(340deg) blur(2px); transform: scale(0.95); }
+            100% { filter: blur(20px); opacity: 0; transform: scale(0.5); }
         }
+        .burning { animation: ashBurn 1.5s forwards; }
 
-        /* THE PHYSICAL BOOK DESIGN */
-        .diary-container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 800px;
-            min-height: 600px;
-            border-radius: 5px 25px 25px 5px;
-            border: 3px solid #ff1493;
-            border-left: 35px solid #ff1493; /* The Book Spine */
-            box-shadow: 10px 10px 0px rgba(255, 20, 147, 0.3);
-            padding: 30px;
-            position: relative;
-        }
+        /* PUBLIC FORUM GRID */
+        .post-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
+        .post-card { background: #fff0f5; border: 2px solid #ff1493; padding: 12px; border-radius: 8px; box-shadow: 3px 3px 0px #ffb6c1; word-wrap: break-word; }
+        .post-card img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
 
-        /* FAKE SPIRAL BINDING RINGS */
-        .diary-container::before {
-            content: "";
-            position: absolute;
-            top: 20px;
-            bottom: 20px;
-            left: -20px;
-            width: 30px;
-            background-image: radial-gradient(circle, #fff 40%, transparent 50%);
-            background-size: 100% 40px;
-        }
-
-        .header {
-            text-align: center;
-            border-bottom: 3px dashed #ffb6c1;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-        }
-
-        .header h1 {
-            font-size: 32px;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0px #ffe4e1;
-        }
-
-        /* THE 4-SQUARE GRID MENU */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .menu-card {
-            background: #fff0f5;
-            border: 3px solid #ff69b4;
-            border-radius: 15px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 4px 4px 0px #ffb6c1;
-        }
-
-        .menu-card:hover {
-            transform: translateY(-5px);
-            background: #ffe4e1;
-            box-shadow: 6px 6px 0px #ff1493;
-        }
-
-        .menu-card h2 {
-            margin: 10px 0 5px 0;
-            font-size: 20px;
-        }
-
-        .menu-card p {
-            font-size: 12px;
-            color: #c71585;
-            margin: 0;
-        }
-
-        .icon {
-            font-size: 40px;
-        }
-
-        /* INSIDE PAGES (Hidden by default) */
-        .page-content {
-            display: none; /* Hidden until clicked */
-        }
-
-        .back-btn {
-            background: #ff1493;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            font-family: inherit;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 2px 2px 0px #000;
-        }
-
-        .back-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px #000;
-        }
-
-        /* PUBLIC FORUM SAFE-GRID (Prevents overlapping) */
-        .post-feed {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .fake-post {
-            background: #fff;
-            border: 2px solid #ffb6c1;
-            padding: 10px;
-            text-align: center;
-            box-shadow: 3px 3px 0px #ffe4e1;
-        }
-
-        .fake-img {
-            width: 100%;
-            height: 120px;
-            background: #eee;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 10px;
-        }
+        /* ARSONETTE CHAT INTERFACE */
+        .chat-box { border: 2px dashed #ff1493; height: 250px; overflow-y: auto; background: #fff5f7; padding: 15px; margin-bottom: 10px; }
+        .msg { margin-bottom: 10px; padding: 8px 12px; border-radius: 10px; font-size: 13px; max-width: 80%; }
+        .msg.user { background: #ff1493; color: white; margin-left: auto; text-align: right; }
+        .msg.arson { background: #e4e4e4; color: #000; margin-right: auto; }
     </style>
 </head>
 <body>
 
     <div class="diary-container">
-        
         <div class="header">
             <h1>💋 The Burn Book 💋</h1>
-            <p style="margin:5px 0 0 0; font-size:14px;">Proceed with absolute caution.</p>
+            <p style="margin:5px 0 0 0; font-size:14px;">Everything is running live. Proceed with caution.</p>
         </div>
 
         <div id="main-menu" class="menu-grid">
-            
-            <div class="menu-card" onclick="openPage('page-vent')">
-                <div class="icon">🔒</div>
-                <h2>The Vault</h2>
-                <p>Private venting. Scream into the digital void. Nobody sees this but you.</p>
-            </div>
-
-            <div class="menu-card" onclick="openPage('page-forum')">
-                <div class="icon">🔥</div>
-                <h2>Public Forum</h2>
-                <p>The actual Burn Book. Uploads, gossip, and anonymous drops.</p>
-            </div>
-
-            <div class="menu-card" onclick="openPage('page-owner')">
-                <div class="icon">👑</div>
-                <h2>DM The Queen</h2>
-                <p>Send a direct, private message straight to the site owner.</p>
-            </div>
-
-            <div class="menu-card" onclick="openPage('page-arsonettes')">
-                <div class="icon">💅</div>
-                <h2>The Arsonettes</h2>
-                <p>Talk to the girls. They bite back.</p>
-            </div>
-
+            <div class="menu-card" onclick="openPage('page-vent')"><div style="font-size:40px;">🔒</div><h2>The Vault</h2><p>Scream into the void. Text ashes and deletes instantly.</p></div>
+            <div class="menu-card" onclick="openPage('page-forum')"><div style="font-size:40px;">🔥</div><h2>Public Forum</h2><p>Live database upload. Drop rumors and photos anonymously.</p></div>
+            <div class="menu-card" onclick="openPage('page-owner')"><div style="font-size:40px;">👑</div><h2>DM The Queen</h2><p>Spill leaks directly to my secure database.</p></div>
+            <div class="menu-card" onclick="openPage('page-arsonettes')"><div style="font-size:40px;">💅</div><h2>The Arsonettes</h2><p>Trade gossip with the girls. Give a rumor, get a rumor.</p></div>
         </div>
 
         <div id="page-vent" class="page-content">
-            <button class="back-btn" onclick="goHome()">⬅ Back to Cover</button>
-            <h2>🔒 The Vault</h2>
-            <p>Type it out and hit burn. It disappears forever.</p>
-            <textarea style="width: 100%; height: 150px; border: 2px solid #ff1493; padding: 10px; font-family: inherit; resize: none;" placeholder="Start venting here..."></textarea>
-            <button class="back-btn" style="margin-top: 10px;">🔥 BURN IT</button>
+            <button class="back-btn" onclick="goHome()">⬅ Cover</button>
+            <h2>🔒 Private Vault</h2>
+            <p>Type your deepest secrets. Once burned, it vanishes completely.</p>
+            <textarea id="ventBox" style="height:150px; resize:none;" placeholder="Talk your shit..."></textarea>
+            <button class="back-btn" style="background:#000;" onclick="burnSecret()">🔥 INCINERATE TEXT</button>
         </div>
 
         <div id="page-forum" class="page-content">
-            <button class="back-btn" onclick="goHome()">⬅ Back to Cover</button>
-            <h2>🔥 The Public Burn Book</h2>
-            <p>Anonymous uploads. Play nice, or don't.</p>
-            <button class="back-btn" style="background: #000;">+ UPLOAD NEW DROP</button>
-            
-            <div class="post-feed">
-                <div class="fake-post">
-                    <div class="fake-img">[Image Placeholder]</div>
-                    <p style="font-size: 12px; margin:0;">"Omg did you hear about..."</p>
-                </div>
-                <div class="fake-post">
-                    <div class="fake-img">[Image Placeholder]</div>
-                    <p style="font-size: 12px; margin:0;">"Spotted at the mall today looking a mess."</p>
-                </div>
-                <div class="fake-post">
-                    <div class="fake-img">[Image Placeholder]</div>
-                    <p style="font-size: 12px; margin:0;">"Just dropping this here..."</p>
-                </div>
-            </div>
+            <button class="back-btn" onclick="goHome()">⬅ Cover</button>
+            <h2>🔥 Live Gossip Feed</h2>
+            <input type="text" id="forumText" placeholder="Drop the tea anonymously...">
+            <label style="font-size:11px; font-weight:bold; cursor:pointer; display:block; margin-bottom:10px;">
+                📸 ATTACH EVIDENCE: <input type="file" id="forumFile" accept="image/*" style="border:none; padding:0;">
+            </label>
+            <button class="back-btn" id="uploadBtn" onclick="uploadToForum()">PUBLISH LEAK</button>
+            <div class="post-feed" id="liveFeed"></div>
         </div>
 
         <div id="page-owner" class="page-content">
-            <button class="back-btn" onclick="goHome()">⬅ Back to Cover</button>
-            <h2>👑 Message The Owner</h2>
-            <p>Got a tip? Send it straight to my inbox.</p>
-            <input type="text" placeholder="Subject..." style="width: 100%; padding: 10px; margin-bottom: 10px; border: 2px solid #ff1493;">
-            <textarea style="width: 100%; height: 100px; border: 2px solid #ff1493; padding: 10px; font-family: inherit; resize: none;" placeholder="Spill it..."></textarea>
-            <button class="back-btn" style="margin-top: 10px;">SEND SECURELY</button>
+            <button class="back-btn" onclick="goHome()">⬅ Cover</button>
+            <h2>👑 Message My Secure Vault</h2>
+            <p>This bypasses the feed and goes straight to a private database only I can read.</p>
+            <input type="text" id="dmSubject" placeholder="What's the topic?..." required>
+            <textarea id="dmMessage" style="height:120px; resize:none;" placeholder="Spill the specific context safely..." required></textarea>
+            <button class="back-btn" onclick="sendQueenDM()">SEND SECURELY</button>
         </div>
 
         <div id="page-arsonettes" class="page-content">
-            <button class="back-btn" onclick="goHome()">⬅ Back to Cover</button>
+            <button class="back-btn" onclick="goHome()">⬅ Cover</button>
             <h2>💅 The Arsonettes Lounge</h2>
-            <p>Pick a character to chat with:</p>
-            <div style="display: flex; gap: 10px;">
-                <button class="back-btn" style="background: #ff69b4;">Chat with Arsonette 1</button>
-                <button class="back-btn" style="background: #ff69b4;">Chat with Arsonette 2</button>
+            <p>Drop a rumor in the chat. If they like it, they might tell you something someone else dropped earlier.</p>
+            <select id="arsonetteSelect">
+                <option value="Chloe">Chloe (Brutally honest)</option>
+                <option value="Madison">Madison (Collects messy drama)</option>
+            </select>
+            
+            <div class="chat-box" id="chatBox">
+                <div class="msg arson"><b>Chloe:</b> Feed me a rumor and maybe I'll give you one back. Make it good.</div>
             </div>
-            <div style="border: 2px dashed #ff1493; height: 150px; background: #fff0f5; padding: 10px; margin-top: 15px;">
-                <p style="color: #999; text-align: center; margin-top: 50px;">[Chat Window Prototype]</p>
+            
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="chatInput" placeholder="Tell her a rumor..." onkeypress="if(event.key==='Enter') sendArsonetteMessage()">
+                <button class="back-btn" style="margin:0; height:42px;" onclick="sendArsonetteMessage()">GOSSIP</button>
             </div>
         </div>
-
     </div>
 
     <script>
-        function openPage(pageId) {
-            // Hide the main menu
+        // --- NAVIGATION ---
+        function openPage(id) {
             document.getElementById('main-menu').style.display = 'none';
-            // Show the selected page
-            document.getElementById(pageId).style.display = 'block';
+            document.getElementById(id).style.display = 'block';
+            if(id === 'page-forum') loadForumPosts();
         }
-
         function goHome() {
-            // Hide all pages
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => page.style.display = 'none');
-            // Show the main menu again
+            document.querySelectorAll('.page-content').forEach(p => p.style.display = 'none');
             document.getElementById('main-menu').style.display = 'grid';
         }
-    </script>
 
-</body>
-</html>
+        // --- ASH BURN LOGIC ---
+        function burnSecret() {
+            const box = document.getElementById('ventBox');
+            if(!box.value.trim()) return;
+            box.classList.add('burning');
+            setTimeout(() => { box.value = ""; box.classList.remove('burning'); }, 1400);
+        }
+
+        // --- FIREBASE INITIALIZATION (USER KEYS EMBEDDED) ---
+        const firebaseConfig = {
