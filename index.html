@@ -5,7 +5,6 @@
     <title>𓆩♡𓆪 The Burn Book 𓆩♡𓆪</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 
     <style>
         /* 🌸 Y2K DIARY AESTHETIC 🌸 */
@@ -30,7 +29,6 @@
         /* PUBLIC FORUM GRID */
         .post-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
         .post-card { background: #fff0f5; border: 2px solid #ff1493; padding: 12px; border-radius: 8px; box-shadow: 3px 3px 0px #ffb6c1; word-wrap: break-word; }
-        .post-card img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
 
         /* ARSONETTE CHAT INTERFACE */
         .chat-box { border: 2px dashed #ff1493; height: 250px; overflow-y: auto; background: #fff5f7; padding: 15px; margin-bottom: 10px; }
@@ -49,7 +47,7 @@
 
         <div id="main-menu" class="menu-grid">
             <div class="menu-card" onclick="openPage('page-vent')"><div style="font-size:40px;">🔒</div><h2>The Vault</h2><p>Scream into the void. Text ashes and deletes instantly.</p></div>
-            <div class="menu-card" onclick="openPage('page-forum')"><div style="font-size:40px;">🔥</div><h2>Public Forum</h2><p>Live database upload. Drop rumors and photos anonymously.</p></div>
+            <div class="menu-card" onclick="openPage('page-forum')"><div style="font-size:40px;">🔥</div><h2>Public Forum</h2><p>Live database upload. Drop rumors anonymously.</p></div>
             <div class="menu-card" onclick="openPage('page-owner')"><div style="font-size:40px;">👑</div><h2>DM The Queen</h2><p>Spill leaks directly to my secure database.</p></div>
             <div class="menu-card" onclick="openPage('page-arsonettes')"><div style="font-size:40px;">💅</div><h2>The Arsonettes</h2><p>Trade gossip with the girls. Give a rumor, get a rumor.</p></div>
         </div>
@@ -66,9 +64,6 @@
             <button class="back-btn" onclick="goHome()">⬅ Cover</button>
             <h2>🔥 Live Gossip Feed</h2>
             <input type="text" id="forumText" placeholder="Drop the tea anonymously...">
-            <label style="font-size:11px; font-weight:bold; cursor:pointer; display:block; margin-bottom:10px;">
-                📸 ATTACH EVIDENCE: <input type="file" id="forumFile" accept="image/*" style="border:none; padding:0;">
-            </label>
             <button class="back-btn" id="uploadBtn" onclick="uploadToForum()">PUBLISH LEAK</button>
             <div class="post-feed" id="liveFeed"></div>
         </div>
@@ -85,14 +80,14 @@
         <div id="page-arsonettes" class="page-content">
             <button class="back-btn" onclick="goHome()">⬅ Cover</button>
             <h2>💅 The Arsonettes Lounge</h2>
-            <p>Drop a rumor in the chat. If they like it, they might tell you something someone else dropped earlier.</p>
+            <p>Drop a rumor in the chat.</p>
             <select id="arsonetteSelect">
-                <option value="Chloe">Chloe (Brutally honest)</option>
-                <option value="Madison">Madison (Collects messy drama)</option>
+                <option value="Madison">Madison (Plays the telephone game)</option>
+                <option value="Chloe">Chloe (Untrustworthy. Distorts other people's secrets)</option>
             </select>
             
             <div class="chat-box" id="chatBox">
-                <div class="msg arson"><b>Chloe:</b> Feed me a rumor and maybe I'll give you one back. Make it good.</div>
+                <div class="msg arson"><b>System:</b> Connected to the lounge. Don't be boring.</div>
             </div>
             
             <div style="display:flex; gap:10px;">
@@ -125,7 +120,7 @@
     </script>
 
     <script>
-        let db, storage;
+        let db;
         try {
             const firebaseConfig = {
                 apiKey: "AIzaSyA-T24KF_DTLsRaAdtVazsG0Uv4n4hk2YA",
@@ -133,13 +128,11 @@
                 projectId: "burnbook-f81c4",
                 storageBucket: "burnbook-f81c4.firebasestorage.app",
                 messagingSenderId: "562124720458",
-                appId: "1:562124720458:web:ab6e1ce5fb72b2d56319b3",
-                measurementId: "G-W9038TCK0V"
+                appId: "1:562124720458:web:ab6e1ce5fb72b2d56319b3"
             };
             
             firebase.initializeApp(firebaseConfig);
             db = firebase.firestore();
-            storage = firebase.storage();
         } catch (error) {
             console.error("Firebase connection paused.", error);
         }
@@ -159,29 +152,22 @@
         }
 
         function uploadToForum() {
-            if(!db || !storage) return alert("Firebase isn't connected properly.");
+            if(!db) return alert("Firebase isn't connected properly.");
             const text = document.getElementById('forumText').value;
-            const file = document.getElementById('forumFile').files[0];
             const btn = document.getElementById('uploadBtn');
             
-            if(!text && !file) return alert("You can't upload an empty rumor.");
+            if(!text) return alert("You can't upload an empty rumor.");
 
             btn.disabled = true; 
             btn.innerText = "UPLOADING...";
 
-            if (file) {
-                const ref = storage.ref('burnbook/' + Date.now() + '_' + file.name);
-                ref.put(file).then(snapshot => snapshot.ref.getDownloadURL()).then(url => saveToFirestore(text, url));
-            } else {
-                saveToFirestore(text, "");
-            }
+            saveToFirestore(text);
         }
 
-        function saveToFirestore(text, imageUrl) {
-            db.collection("posts").add({ text: text, image: imageUrl, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+        function saveToFirestore(text) {
+            db.collection("posts").add({ text: text, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
             .then(() => {
                 document.getElementById('forumText').value = ""; 
-                document.getElementById('forumFile').value = "";
                 const btn = document.getElementById('uploadBtn');
                 btn.disabled = false; 
                 btn.innerText = "PUBLISH LEAK";
@@ -196,8 +182,7 @@
                 feed.innerHTML = "";
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    let imgTag = data.image ? `<img src="${data.image}">` : '';
-                    feed.innerHTML += `<div class="post-card">${imgTag}<p style="margin:0; font-size:13px;">"${data.text || ''}"</p></div>`;
+                    feed.innerHTML += `<div class="post-card"><p style="margin:0; font-size:13px;">"${data.text || ''}"</p></div>`;
                 });
             });
         }
@@ -211,7 +196,7 @@
         function sendArsonetteMessage() {
             const input = document.getElementById('chatInput');
             const box = document.getElementById('chatBox');
-            const char = document.getElementById('arsonetteSelect').value;
+            const char = document.getElementById('arsonSelect') ? document.getElementById('arsonSelect').value : document.getElementById('arsonetteSelect').value;
             const rumor = input.value.trim();
             if(!rumor) return;
 
@@ -219,31 +204,68 @@
             input.value = "";
             box.scrollTop = box.scrollHeight;
 
-            if(!db) {
-                setTimeout(() => {
-                    box.innerHTML += `<div class="msg arson"><b>${char}:</b> Ugh, I don't have time for this right now.</div>`;
-                    box.scrollTop = box.scrollHeight;
-                }, 1000);
-                return;
-            }
+            if(!db) return;
 
+            // Save user's rumor to the pool
             db.collection('gossip_pool').add({ text: rumor, timestamp: firebase.firestore.FieldValue.serverTimestamp() });
 
-            db.collection('gossip_pool').limit(20).get().then(snap => {
+            // Fetch rumors to talk back
+            db.collection('gossip_pool').limit(30).get().then(snap => {
                 let pool = [];
                 snap.forEach(doc => pool.push(doc.data().text));
                 
-                let replyGossip = seedGossip[Math.floor(Math.random() * seedGossip.length)];
-                if(pool.length > 1) {
-                    let filteredPool = pool.filter(g => g !== rumor);
-                    if(filteredPool.length > 0) replyGossip = filteredPool[Math.floor(Math.random() * filteredPool.length)];
-                }
+                // Filter out the exact rumor the user just sent so she doesn't use it immediately
+                let otherRumors = pool.filter(g => g !== rumor);
+                if (otherRumors.length === 0) otherRumors = seedGossip;
 
-                const attitude = char === "Chloe" ? "Oh please. That's nothing. Someone literally just told me: " : "Messy. But wait, did you hear this? ";
-                setTimeout(() => {
-                    box.innerHTML += `<div class="msg arson"><b>${char}:</b> ${attitude} "${replyGossip}"</div>`;
-                    box.scrollTop = box.scrollHeight;
-                }, 1000);
+                if (char === "Madison") {
+                    // MADISON: The Telephone Game
+                    let replyGossip = otherRumors[Math.floor(Math.random() * otherRumors.length)];
+                    setTimeout(() => {
+                        box.innerHTML += `<div class="msg arson"><b>Madison:</b> Messy. But wait, did you hear this? "${replyGossip}"</div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }, 1000);
+
+                } else if (char === "Chloe") {
+                    // CHLOE: Distorts OTHER people's rumors
+                    let replyGossip = "";
+                    let attitude = "";
+
+                    if (Math.random() > 0.5 && otherRumors.length >= 2) {
+                        // Mix and match two random OTHER rumors
+                        let r1 = otherRumors[Math.floor(Math.random() * otherRumors.length)];
+                        let r2 = otherRumors[Math.floor(Math.random() * otherRumors.length)];
+                        while (r1 === r2 && otherRumors.length > 1) {
+                             r2 = otherRumors[Math.floor(Math.random() * otherRumors.length)];
+                        }
+                        let split1 = r1.split(" ");
+                        let split2 = r2.split(" ");
+                        let half1 = split1.slice(0, Math.max(1, Math.ceil(split1.length / 2))).join(" ");
+                        let half2 = split2.slice(Math.max(1, Math.ceil(split2.length / 2))).join(" ");
+                        
+                        replyGossip = half1 + " " + half2;
+                        attitude = "Wait, I'm putting the pieces together... is it true that ";
+                    } else {
+                        // Anagram someone ELSE's rumor
+                        let sourceRumor = otherRumors[Math.floor(Math.random() * otherRumors.length)];
+                        let words = sourceRumor.split(" ");
+                        let anagrammedWords = words.map(w => {
+                            let chars = w.split('');
+                            for (let i = chars.length - 1; i > 0; i--) {
+                                let j = Math.floor(Math.random() * (i + 1));
+                                [chars[i], chars[j]] = [chars[j], chars[i]];
+                            }
+                            return chars.join('');
+                        });
+                        replyGossip = anagrammedWords.join(" ");
+                        attitude = "Someone literally just texted me this but I can't read it. What does this mean: ";
+                    }
+
+                    setTimeout(() => {
+                        box.innerHTML += `<div class="msg arson"><b>Chloe:</b> ${attitude} "${replyGossip}"</div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }, 1000);
+                }
             });
         }
     </script>
